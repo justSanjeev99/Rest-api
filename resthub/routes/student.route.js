@@ -1,10 +1,7 @@
 const express = require('express');
 const app = express();
-// Express route
 const studentExpressRoute = express.Router();
-// User schema
 let StudentSchema = require('../model/student.model');
-// Get users
 studentExpressRoute.route('/').get((req, res) => {
     StudentSchema.find((error, data) => {
         if (error) {
@@ -14,7 +11,6 @@ studentExpressRoute.route('/').get((req, res) => {
         }
     })
 })
-// Create user
 studentExpressRoute.route('/create-student').post((req, res, next) => {
     StudentSchema.create(req.body, (error, data) => {
         if (error) {
@@ -25,7 +21,6 @@ studentExpressRoute.route('/create-student').post((req, res, next) => {
     })
 });
 
-// Get single user
 studentExpressRoute.route('/get-student/:id').get((req, res) => {
     StudentSchema.findById(req.params.id, (error, data) => {
         if (error) {
@@ -36,7 +31,7 @@ studentExpressRoute.route('/get-student/:id').get((req, res) => {
     })
 })
 
-// Update user
+
 studentExpressRoute.route('/update-student/:id').put((req, res, next) => {
     StudentSchema.findByIdAndUpdate(req.params.id, {
         $set: req.body
@@ -49,7 +44,6 @@ studentExpressRoute.route('/update-student/:id').put((req, res, next) => {
         }
     })
 })
-// Delete student
 studentExpressRoute.route('/remove-student/:id').delete((req, res, next) => {
     StudentSchema.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
